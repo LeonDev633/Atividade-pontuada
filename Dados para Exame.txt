@@ -1,3 +1,5 @@
-leonardo,Machado,23,62.0,1.82,MASCULINO
-luiza,Maria,20,50.0,1.5,MULHER
-amanda,Silva,16,57.0,1.62,MULHER
+leonardo,Machado ,23,62.5,1.82,MASCULINO
+leandro,Junior,22,65.0,1.75,MASCULINO
+maria,Helloisa,16,52.0,1.6,MULHER
+amanda,Silva,16,57.5,1.62,MULHER
+luane,Silva,25,78.0,1.75,MULHER

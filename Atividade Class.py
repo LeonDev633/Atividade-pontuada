@@ -17,16 +17,19 @@ class Pessoa:
 
 #Função para criar arquivo txt:
 def criando_arquivo(a,b):
-    with open(a,"a") as arquivo_dados:
-        for pessoa in b:
+    nome_do_arquivo = a
+    lista_dados=b
+    with open(nome_do_arquivo,"a") as arquivo_dados:
+        for pessoa in lista_dados:
             arquivo_dados.write(f"{pessoa.nome},{pessoa.sobrenome},{pessoa.idade},{pessoa.peso},{pessoa.altura},{pessoa.sexo}\n")
     arquivo_dados.close()
     print("\n=== Dados Salvos ===\n")
 
 #Função para ler arquivos criados:
 def lendo_arquivo(a):
+    nome_do_arquivo = a
     list_dados=[]
-    with open(a,"r") as arquivo_origem:
+    with open(nome_do_arquivo,"r") as arquivo_origem:
         for linha in arquivo_origem:
             nome, sobrenome, idade, peso, altura, sexo = linha.strip().split(",")
             list_dados.append(Pessoa(nome=nome, sobrenome=sobrenome,idade=int(idade),peso=float(peso),altura=float(altura), sexo=sexo))
@@ -64,6 +67,7 @@ def menu ():
 3- TAXA METABÓLICA BASAL
 4- PERCENTUAL DE GORDURA CORPORAL (ESTIMATIVA VIA IMC)
 5- PESO IDEAL (FÓRMULA DE DIVINE)
+6- ENCERRAR PROGRAMA
 """)
 
 #Taxa Metabolica:
@@ -96,20 +100,19 @@ def peso_ideal(altura,posicao,sexo):
         peso_ideal_homens =50+2.3*(((altura[i]*100)/2.54)-60)
         return peso_ideal_homens
         
-
 while True:
     while True:
         system("cls||clear")
         menu()
         opcao = int(input(": "))
-        if  opcao >= 1 and opcao <=5:
+        if  opcao >= 1 and opcao <=6:
             break
     match (opcao):
         case 1:
             while True:
-                print("="*40)
-                print(f"{"INFORMAÇÔES":^40}")
-                print("="*40)
+                print("="*42)
+                print(f"{"INFORMAÇÔES":^42}")
+                print("="*42)
                 pessoa = Pessoa(
                     nome = input("\nNome: ").lower(),
                     sobrenome = input("sobrenome: "),
@@ -132,10 +135,9 @@ while True:
             list_sobrenome = []
             dados = []
             system("cls||clear")
-            print("="*40)
-            print(f"{"CALCULANDO IMC":^40}")
-            print("="*40)
-            nome_seleção = input("Opção valida apenas para quem tenha adici=\nonados os dados anteriormente.\nInforme seu nome: ").lower()
+            print("="*42)
+            print(f"{"CALCULANDO IMC":^42}")
+            print("="*42)
             nome_arquivo = "Dados para Exame.txt"
             dados = lendo_arquivo(nome_arquivo)
             for dado in dados:
@@ -143,17 +145,23 @@ while True:
                 list_sobrenome.append(dado.sobrenome)
                 list_altura.append(dado.altura)
                 list_peso.append(dado.peso)
-            posicao = list_nome.index(nome_seleção)
+            while True:
+                nome_seleção = input("Opção valida apenas para quem tenha adici-\nonados os dados anteriormente.\nInforme seu nome: ").lower()
+                if nome_seleção in list_nome:
+                    posicao = list_nome.index(nome_seleção)
+                    break
+                else:
+                    print("Nome não encontrado, informe um \nnome cadastrado")
             nome_correto = list(map(str.capitalize, list_nome))
             imc=IMC(list_peso,list_altura,posicao)
-            print("-"*40)
+            print("-"*42)
             print(f"Nome: {nome_correto[posicao]} {list_sobrenome[posicao]}")
             print(f"Altura: {list_altura[posicao]}")
             print(f"Peso: {list_peso[posicao]}")
             print(f"IMC: {imc:.2f}")
             verificando_imc(imc)
-            print("-"*40)
-            sleep(20)
+            print("-"*42)
+            sleep(10)
         case 3:
             list_nome = []
             list_altura = []
@@ -163,10 +171,9 @@ while True:
             list_sobrenome =[]
             dados = []
             system("cls||clear")
-            print("="*40)
-            print(f"{"CALCULANDO TAXA METABÓLICA BASAL":^40}")
-            print("="*40)
-            nome_seleção = input("Opção valida apenas para quem tenha adici=\nonados os dados anteriormente.\nInforme seu nome: ").lower()
+            print("="*42)
+            print(f"{"CALCULANDO TAXA METABÓLICA BASAL":^42}")
+            print("="*42)
             nome_arquivo = "Dados para Exame.txt"
             dados = lendo_arquivo(nome_arquivo)
             for dado in dados:
@@ -176,16 +183,22 @@ while True:
                 list_altura.append(dado.altura)
                 list_peso.append(dado.peso)
                 list_sexo.append(dado.sexo)
-            posicao = list_nome.index(nome_seleção)
+            while True:
+                nome_seleção = input("Opção valida apenas para quem tenha adici-\nonados os dados anteriormente.\nInforme seu nome: ").lower()
+                if nome_seleção in list_nome:
+                    posicao = list_nome.index(nome_seleção)
+                    break
+                else:
+                    print("Nome não encontrado, informe um \nnome cadastrado")
             nome_correto = list(map(str.capitalize, list_nome))
             taxa = tax_metabolica(list_sexo,list_peso,lista_idade,list_altura,posicao)
-            print("-"*40)
+            print("-"*42)
             print(f"Nome: {nome_correto[posicao]} {list_sobrenome[posicao]}")
             print(f"Altura: {list_altura[posicao]}")
             print(f"Peso: {list_peso[posicao]}")
             print(f"Taxa Metabólica Basal (TMB): {taxa:.2f}")
-            print("-"*40)
-            sleep(20)
+            print("-"*42)
+            sleep(10)
         case 4:
             list_nome = []
             list_altura = []
@@ -195,10 +208,9 @@ while True:
             lista_idade=[]
             dados = []
             system("cls||clear")
-            print("="*40)
-            print(f"{"CALCULANDO PERCENTUAL DE GORDURA":^40}")
-            print("="*40)
-            nome_seleção = input("Opção valida apenas para quem tenha adici-\nonados os dados anteriormente.\nInforme seu nome: ").lower()
+            print("="*42)
+            print(f"{"CALCULANDO PERCENTUAL DE GORDURA":^42}")
+            print("="*42)
             nome_arquivo = "Dados para Exame.txt"
             dados = lendo_arquivo(nome_arquivo)
             for dado in dados:
@@ -208,17 +220,23 @@ while True:
                 list_peso.append(dado.peso)
                 lista_sexo.append(dado.sexo)
                 lista_idade.append(dado.idade)
-            posicao = list_nome.index(nome_seleção)
+            while True:
+                nome_seleção = input("Opção valida apenas para quem tenha adici-\nonados os dados anteriormente.\nInforme seu nome: ").lower()
+                if nome_seleção in list_nome:
+                    posicao = list_nome.index(nome_seleção)
+                    break
+                else:
+                    print("Nome não encontrado, informe um \nnome cadastrado")
             nome_correto = list(map(str.capitalize, list_nome))
             imc=IMC(list_peso,list_altura,posicao)
             gordura = percentual_gordura(imc,lista_idade,lista_sexo,posicao)
-            print("-"*40)
+            print("-"*42)
             print(f"Nome: {nome_correto[posicao]} {list_sobrenome[posicao]}")
             print(f"Altura: {list_altura[posicao]}")
             print(f"Peso: {list_peso[posicao]}")
             print(f"Percentual de gordura: {gordura:.2f} %")
-            print("-"*40)
-            sleep(20)
+            print("-"*42)
+            sleep(10)
         case 5:
             list_nome = []
             list_altura = []
@@ -226,10 +244,9 @@ while True:
             list_sobrenome = []
             dados = []
             system("cls||clear")
-            print("="*40)
-            print(f"{"CALCULANDO PESO IDEAL":^40}")
-            print("="*40)
-            nome_seleção = input("Opção valida apenas para quem tenha adici-\nonados os dados anteriormente.\nInforme seu nome: ").lower()
+            print("="*42)
+            print(f"{"CALCULANDO PESO IDEAL":^42}")
+            print("="*42)
             nome_arquivo = "Dados para Exame.txt"
             dados = lendo_arquivo(nome_arquivo)
             for dado in dados:
@@ -237,13 +254,20 @@ while True:
                 list_sobrenome.append(dado.sobrenome)
                 list_altura.append(dado.altura)
                 lista_sexo.append(dado.sexo)
-            posicao = list_nome.index(nome_seleção)
+            while True:
+                nome_seleção = input("Opção valida apenas para quem tenha adici-\nonados os dados anteriormente.\nInforme seu nome: ").lower()
+                if nome_seleção in list_nome:
+                    posicao = list_nome.index(nome_seleção)
+                    break
+                else:
+                    print("Nome não encontrado, informe um \nnome cadastrado")
             nome_correto = list(map(str.capitalize, list_nome))
             peso_id = peso_ideal(list_altura,posicao,lista_sexo)
-            system("cls||clear")
-            print("-"*40)
+            print("-"*42)
             print(f"Nome: {nome_correto[posicao]} {list_sobrenome[posicao]}")
             print(f"Altura: {list_altura[posicao]}")
             print(f"Peso ideal: {peso_id:.2f}")
-            print("-"*40)
-            sleep(20)
+            print("-"*42)
+            sleep(10)
+        case 6:
+            break
