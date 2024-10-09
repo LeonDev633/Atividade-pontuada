@@ -73,7 +73,7 @@ def menu ():
 #Taxa Metabolica:
 def tax_metabolica(sexo,peso,idade,altura,posicao):
     i = posicao
-    if sexo[i] == "MULHER":
+    if sexo[i] == "MULHER" or sexo[i] == "FEMININO":
         TMB_M = 447.6 + (9.2*peso[i])+(3.1*(altura[i]*100))-(4.3*idade[i])
         return TMB_M
     else:
@@ -83,7 +83,7 @@ def tax_metabolica(sexo,peso,idade,altura,posicao):
 #Percentual de Gordura:
 def percentual_gordura (imc,idade,sexo,posicao):
     i = posicao
-    if sexo[i] == "MULHER":
+    if sexo[i] == "MULHER" or sexo[i] == "FEMININO":
         percentual_mulheres = (1.20*imc)+(0.23*idade[i])-5.4
         return percentual_mulheres
     else:
@@ -93,7 +93,7 @@ def percentual_gordura (imc,idade,sexo,posicao):
 #Peso ideal:
 def peso_ideal(altura,posicao,sexo):
     i = posicao
-    if sexo[i] == "MULHER":
+    if sexo[i] == "MULHER" or sexo[i] == "FEMININO":
         peso_ideal_mulheres = 45.5+2.3*(((altura[i]*100)/2.54)-60)
         return peso_ideal_mulheres
     else:
