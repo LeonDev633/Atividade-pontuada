@@ -1,1 +1,5 @@
 leonardo,Machado,23,62.5,1.82,MASCULINO
+henrique,santos,20,85.0,1.8,MASCULINO
+leonardo,Machado,23,62.5,1.82,MASCULINO
+henrique,santos,20,85.0,1.8,MASCULINO
+yan,Mendes,23,68.0,1.7,M
